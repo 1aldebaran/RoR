@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+  </head>
+  <body>
+    <div>
+      <%= flash[:notice] %>
+      <h2>Submitted Information</h2>
+      <p>Name:  <%= @survey.name %></p>
+      <p>Dojo Location:  <%= @survey.location %></p>
+      <p>Favorite Language:  <%= @survey.language %></p>
+      <p>Comment:  <%= @survey.comment %></p>
+      <a href="/">Go Back</a>
+    </div>
+  </body>
+</html>

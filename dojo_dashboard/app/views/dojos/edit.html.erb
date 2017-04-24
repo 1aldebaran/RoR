@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit dojo</title>
+  </head>
+  <body>
+    <h1><%= flash[:notice] %></h1>
+
+    <h1>Editing <%= @dojo.branch %></h1>
+    <form action="/dojos/<%= @dojo.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      Branch: <input type="text" name="dojo[branch]" placeholder="<%= @dojo.branch %>"><br><br>
+      Street: <input type="text" name="dojo[street]" placeholder="<%= @dojo.street %>"><br><br>
+      City: <input type="text" name="dojo[city]" placeholder="<%= @dojo.city %>"><br><br>
+      State: <input type="text" name="dojo[state]" placeholder="<%= @dojo.state %>"><br><br>
+      <input type="submit" value="Update Dojo"><br><br>
+    </form>
+    <%= link_to "Back", dojo_path(@dojo) %> 
+  </body>
+</html>

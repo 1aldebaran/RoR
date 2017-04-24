@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dojomusichub</title>
+  </head>
+  <body>
+    <div>
+      <h3>Users who added <%= @song.artist %> - <%= @song.title %>:</h3>
+      <% if !@users.empty? %>
+      <table>
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Times Added</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each_pair do |user_name, songs| %>
+            <tr>
+              <td><%= link_to "#{user_name.first_name} #{user_name.last_name}", user_path(user_name) %></td>
+              <td><%= songs.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%else%>
+      <h4>No User has added this song to their playlist</h4>
+      <%end%>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=current_user.username%></title>
+  </head>
+  <body>
+    <h3><%=current_user.username%>  <%= link_to "Edit Profile", edit_user_path(current_user), :method => :get %></h3>
+    <p>New Secret</p>
+    <form action="/secrets" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <textarea name="content" rows="8" cols="80"></textarea><br><br>
+      <input type="submit" value="Create Secret"><br><br>
+    </form>
+    <div>
+
+      <% if !@secrets.empty? %>
+      <h3>Secrets</h3>
+      <%end%>
+      <% @secrets.each do |secret| %>
+        <div>
+          <p><%= secret.content %>
+            <%if current_user == secret.user %>
+            <%= link_to "Delete", secret_path(secret), :method => :delete %>
+            <%end%>
+          </p>
+          <p><%= secret.likes.where(secret:secret).count %> <%= "like".pluralize( secret.likes.where(secret:secret).count) %>
+
+            <% if !@secrets_liked.where(user:current_user).exists?%>
+            <%= link_to "Like", likes_path(secret), :method => :post %>
+            <%else%>
+            <%=link_to "Unlike", like_path(secret.likes.find_by(user:current_user, secret:secret).id), :method => :delete %>
+            <%end%>
+
+          </p>
+        </div>
+      <%end%>
+      <% if !@secrets_liked.empty? %>
+      <h3>Secrets Liked</h3>
+      <%end%>
+      <% @secrets_liked.each do |secret| %>
+        <div>
+          <p><%= secret.content%></p>
+          <p><%= secret.likes.where(secret:secret).count %> <%= "like".pluralize( secret.likes.where(secret:secret).count) %>
+        </div>
+      <%end%>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dojomusichub</title>
+  </head>
+  <body>
+    <div>
+      <h3><%= @user.first_name %> <%= @user.last_name %>'s Playlist</h3>
+      <table>
+        <thead>
+          <tr>
+            <td>Artist</td>
+            <td>Title</td>
+            <td>Times Added</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @plist.each_pair do |plist_name, users| %>
+            <tr>
+              <td><%= plist_name.artist %></td>
+              <td><%= plist_name.title %></td>
+              <td><%= users.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

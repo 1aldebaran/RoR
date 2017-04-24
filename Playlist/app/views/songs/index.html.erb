@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dojomusichub</title>
+  </head>
+  <body>
+    <div>
+      <% if !@songs.empty? %>
+      <h3>All the songs in our hub:</h3>
+      <table>
+        <thead>
+          <tr>
+            <td>Artist</td>
+            <td>Title</td>
+            <td>No of Times Song Has Been Added</td>
+            <td>Add to Playlist</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @songs.each do |song| %>
+            <tr>
+              <td><%= song.artist %></td>
+              <td><%= link_to "#{song.title}", song_path(song) %></td>
+              <td><%= song.count %></td>
+              <td><%= link_to "Add", plists_path(song), :method => :post %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%end%>
+      <h3>Add a Song:</h3>
+      <form action="/songs" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      Title:  <input type="text" name="title"><br><br>
+      Artist: <input type="text" name="artist"><br><br>
+      <input type="submit" value="Add Song"><br><br>
+    </form>
+    </div>
+  </body>
+</html>
